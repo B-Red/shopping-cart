@@ -22,7 +22,8 @@ class App extends React.Component {
               { id: 46, name: 'Intelligent Leather Clock', priceInCents: 2999 },
               { id: 47, name: 'Ergonomic Bronze Lamp', priceInCents: 40000 },
               { id: 48, name: 'Awesome Leather Shoes', priceInCents: 3990 },
-              ]
+              ],
+      
     }
   }
 
