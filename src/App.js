@@ -32,6 +32,7 @@ class App extends React.Component {
   }
 
   addToCart = (item) => {
+    console.log(item)
     this.setState(prevState => ({
         cartItemsList: prevState.cartItemsList.concat(item)
         
@@ -40,10 +41,26 @@ class App extends React.Component {
   }
   onSubmit = (e) => {
     e.preventDefault()
-    this.addToCart(this.state)
+    
     // Filter through products and grab matching id:
+    let selectedProducts = this.state.products.filter( product => {
+      console.log('product', product)
+      return this.state.selction == product.id
+    })
+
+    console.log('selected', selectedProducts)
     // create a var make an object that has id (cartitemslis[i] + 1)
     // add quantity 
+
+    let newItem = { 
+      id: this.state.cartItemsList.length +1, 
+      product: { 
+        id: selectedProducts[0].id, 
+        name: selectedProducts[0].name, 
+        priceInCents: selectedProducts[0].priceInCents }, 
+      quantity: parseInt(this.state.quantity) }
+
+    this.addToCart(newItem)
 }
 
   onChange = (e) => this.setState({[e.target.name]: e.target.value})
