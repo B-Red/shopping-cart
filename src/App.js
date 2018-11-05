@@ -34,9 +34,19 @@ class App extends React.Component {
   addToCart = (item) => {
     this.setState(prevState => ({
         cartItemsList: prevState.cartItemsList.concat(item)
+        
       }
     ))
   }
+  onSubmit = (e) => {
+    e.preventDefault()
+    this.addToCart(this.state)
+    // Filter through products and grab matching id:
+    // create a var make an object that has id (cartitemslis[i] + 1)
+    // add quantity 
+}
+
+  onChange = (e) => this.setState({[e.target.name]: e.target.value})
 
   render() {
 
@@ -44,7 +54,7 @@ class App extends React.Component {
       <div>
         <CartHeader />
         <CartItems cartItemList = {this.state.cartItemsList} />
-        <AddItem onAddToCart = { this.addToCart } productsList={this.state.products} />
+        <AddItem onChange={ this.onChange} onSubmit={ this.onSubmit } productsList={this.state.products} />
         <CartFooter copyright = "2016" />
       </div>
     )

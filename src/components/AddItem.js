@@ -1,26 +1,20 @@
 import React from 'react';
 
 class AddItem extends React.Component{
-    state = {}
 
-    onSubmit = (e) => {
-        e.preventDefault()
-        this.props.onAddCartItem(this.state)
-    }
-
-    onChange = (e) => this.setState({[e.target.name]: e.target.value})
+    
 
     render() {
         return (
             <div className="container">
-                <form onSubmit= { this.onSubmit }>
+                <form onSubmit= { this.props.onSubmit }>
                     Quantity:
                     <div>
-                        <input onChange = { this.onChange } className="qtyInput" name="quantity" type="number" min="0" max="100" placeholder="0"></input>
+                        <input onChange = { this.props.onChange } className="qtyInput" name="quantity" type="number" min="0" max="100" placeholder="0"></input>
                     </div>
                     Products:
                     <div className="input-group mb-3">
-                        <select onChange = { this.onChange } className="custom-select" id="inputGroupSelect02" name="selction">
+                        <select onChange = { this.props.onChange } className="custom-select" id="inputGroupSelect02" name="selction">
                             <option defaultValue>Choose...</option>{this.props.productsList.map((product) => <option key={product.id} value={product.id}>Item: {product.name} \\ Price: {product.priceInCents}&#162;</option>)}
                         </select>
                     </div>

@@ -4,6 +4,7 @@ const CartItem = (props) => {
     return (
         <div className="collection-item">
         {props.cartItemList.map(item => {
+            console.log(item)
                 return (
                         <div className="list-group-item" key={item.id}>
                             <div className="row">
