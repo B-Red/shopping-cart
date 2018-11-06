@@ -3,7 +3,7 @@ import CartHeader from './components/CartHeader.js';
 import CartItems from './components/CartItems.js';
 import CartFooter from './components/CartFooter.js';
 import AddItem from './components/AddItem.js';
-import CartItem from './components/CartItem.js';
+import CartTotal from './components/CartTotal';
 
 
 
@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   addToCart = (item) => {
-    console.log(item)
+    //console.log(item)
     this.setState(prevState => ({
         cartItemsList: prevState.cartItemsList.concat(item)
         
@@ -41,29 +41,34 @@ class App extends React.Component {
   }
   onSubmit = (e) => {
     e.preventDefault()
-    
-    // Filter through products and grab matching id:
+
     let selectedProducts = this.state.products.filter( product => {
-      console.log('product', product)
+      //console.log('product', product)
       return this.state.selction == product.id
     })
 
-    console.log('selected', selectedProducts)
-    // create a var make an object that has id (cartitemslis[i] + 1)
-    // add quantity 
+    //console.log('selected', selectedProducts)
 
     let newItem = { 
       id: this.state.cartItemsList.length +1, 
       product: { 
         id: selectedProducts[0].id, 
         name: selectedProducts[0].name, 
-        priceInCents: selectedProducts[0].priceInCents }, 
+        priceInCents: (selectedProducts[0].priceInCents / 100).toFixed(2) }, 
       quantity: parseInt(this.state.quantity) }
 
     this.addToCart(newItem)
 }
 
   onChange = (e) => this.setState({[e.target.name]: e.target.value})
+  
+  total = () => {
+    var total = 0
+    for(var i = 0; i < this.state.cartItemsList; i++){
+      total += this.state.cartItemsList[i].quantity * this.state.cartItemsList[i].product.priceInCents
+    }
+    return total
+  }
 
   render() {
 
@@ -71,7 +76,8 @@ class App extends React.Component {
       <div>
         <CartHeader />
         <CartItems cartItemList = {this.state.cartItemsList} />
-        <AddItem onChange={ this.onChange} onSubmit={ this.onSubmit } productsList={this.state.products} />
+        <CartTotal total = {this.state.total} />
+        <AddItem onChange={this.onChange} onSubmit={this.onSubmit } productsList={this.state.products} />
         <CartFooter copyright = "2016" />
       </div>
     )

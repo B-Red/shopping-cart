@@ -9,7 +9,7 @@ const CartItem = (props) => {
                         <div className="list-group-item" key={item.id}>
                             <div className="row">
                                 <div className="col-md-8">{item.product.name}</div>
-                                <div className="col-md-2">{item.product.priceInCents}</div>
+                                <div className="col-md-2">${(item.product.priceInCents / 100).toFixed(2)}</div>
                                 <div className="col-md-2">{item.quantity}</div>
                             </div>
                         </div>
