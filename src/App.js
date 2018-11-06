@@ -54,7 +54,7 @@ class App extends React.Component {
       product: { 
         id: selectedProducts[0].id, 
         name: selectedProducts[0].name, 
-        priceInCents: (selectedProducts[0].priceInCents / 100).toFixed(2) }, 
+        priceInCents: selectedProducts[0].priceInCents}, 
       quantity: parseInt(this.state.quantity) }
 
     this.addToCart(newItem)
@@ -62,12 +62,12 @@ class App extends React.Component {
 
   onChange = (e) => this.setState({[e.target.name]: e.target.value})
   
-  total = () => {
-    var total = 0
-    for(var i = 0; i < this.state.cartItemsList; i++){
-      total += this.state.cartItemsList[i].quantity * this.state.cartItemsList[i].product.priceInCents
+  total = (cartItemsList) => {
+    var totalnum = 0
+    for(var i = 0; i < this.state.cartItemsList.length; i++){
+      totalnum += this.state.cartItemsList[i].quantity * this.state.cartItemsList[i].product.priceInCents
     }
-    return total
+    return totalnum
   }
 
   render() {
@@ -76,7 +76,7 @@ class App extends React.Component {
       <div>
         <CartHeader />
         <CartItems cartItemList = {this.state.cartItemsList} />
-        <CartTotal total = {this.state.total} />
+        <CartTotal total = {this.total}/>
         <AddItem onChange={this.onChange} onSubmit={this.onSubmit } productsList={this.state.products} />
         <CartFooter copyright = "2016" />
       </div>
